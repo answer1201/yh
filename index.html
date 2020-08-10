@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./build/calendar.css">
+    <style>
+        .btn{
+            background: #f00;color:#fff
+        }
+    </style>
+</head>
+<body style="background:#ddd;">
+    <div style="text-align: center">
+        <button id="button" onclick="send()">发送数据到react native</button>
+        <p style="text-align: center">收到react native发送的数据: <span id="data"></span></p>
+    </div>
+</body>
+<script>
+    var data = 0;
+    function send () {
+        data += 100;
+        window.ReactNativeWebView.postMessage("Hello React");
+    }
+    window.onload = function () {
+        document.addEventListener('message', function (e) {
+            document.getElementById('data').textContent = e.data;
+        });
+    }
+</script>
+</html>
